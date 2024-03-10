@@ -267,27 +267,27 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
         talon[curposI-pomeraj][curposJ]=Figura;
     }
 
-        //iz prvog reda u poslednju kolonu
+        //iz prvog reda u poslednju kolonu (radi)
     else if(curposI==0 && curposJ+pomeraj>n-1){
         int ostatak=pomeraj - (n-1-curposJ);
         talon[ostatak][n-1] = Figura;
     }
-        //iz poslednje kolone u poslednji red
+        //iz poslednje kolone u poslednji red (radi)
     else if(curposJ==n-1 && curposI+pomeraj>m-1){
         int ostatak=pomeraj - (m-1-curposI);
-        talon[m-1][n-ostatak] = Figura;
+        talon[m-1][n-ostatak-1] = Figura;
     }
 
 
-        //iz poslednjeg reda u prvu kolonu
-    else if(curposI==m-1 && curposJ-pomeraj<0){
-        int ostatak=pomeraj - (m-1-curposI);
-        talon[m-1-ostatak][0] = Figura;
+        // iz poslednjeg reda u prvu kolonu (radi)
+    else if (curposI == m - 1 && curposJ - pomeraj < 0) {
+        int ostatak = pomeraj - (m - 1 - curposI);
+        talon[m-1 - ostatak][0] = Figura;
     }
 
-        //iz prve kolone u prvi red
-    else if(curposJ==0 && curposJ-pomeraj<0){
-        int ostatak=pomeraj - (n-1-curposJ);
+    // iz prve kolone u prvi red (greska)
+    else if (curposJ == 0 && curposI - pomeraj < 0) {
+        int ostatak = pomeraj - (n - 1 - curposJ);
         talon[0][ostatak] = Figura;
     }
 
