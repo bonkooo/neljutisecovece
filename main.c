@@ -276,18 +276,18 @@ void Pojeden(int Figura, struct listHeader* head1, struct listHeader* head2, str
 
 int proveriKucicu(int curIgrac, int i, int j, int m, int n) {
     if (curIgrac == 1) {
-        if ((i <= m - 1)) {
+        if ((i < m - 1)) {
             return 1;
         }
     } else if (curIgrac == 2) {
-        if (( j >= 0))
+        if (( j > 0))
             return 1;
     } else if (curIgrac == 3) {
-        if ( i >= 0) {
+        if ( i > 0) {
             return 1;
         }
-    } else {
-        if (j <= n - 1) {
+    } else if (curIgrac==4){
+        if (j < n - 1) {
             return 1;
         }
     }
@@ -346,9 +346,8 @@ void odigrajKucicu(int m,int n,int curposI, int curposJ, int pomeraj, int Figuri
     }
     else if(Figurica/10==3){
         int ostatak = pomeraj - (n - 1 - curposJ);
-        //ostatak,m-1
         if(ostatak<5){
-            talon[ostatak][m-2]=Figurica;
+            talon[ostatak][n-2]=Figurica;
             talon[curposI][curposJ]=0;
 
         }
@@ -368,6 +367,21 @@ void odigrajKucicu(int m,int n,int curposI, int curposJ, int pomeraj, int Figuri
             printf("Nemoguce ubaciti u kucicu.\n");
             talon[curposI][curposJ]=Figurica;
         }
+    }
+}
+
+void proveriUlazKucice(int m, int n, int curIgrac, int curposI, int curposJ){
+    if (curIgrac == 1 && curposI == m - 1){
+        proveriKucicu(curIgrac, curposI, curposJ, m, n);
+    }
+    else if (curIgrac == 2 && curposJ == 0){
+        proveriKucicu(curIgrac, curposI, curposJ, m, n);
+    }
+    else if (curIgrac == 3 && curposI == 0){
+        proveriKucicu(curIgrac, curposI, curposJ, m, n);
+    }
+    else if (curIgrac == 4 && curposJ == n - 1){
+        proveriKucicu(curIgrac, curposI, curposJ, m, n);
     }
 }
 
@@ -393,6 +407,9 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
             if(proveraGdeSeNalazi(m,n,curposI, curposJ, curIgrac)) {
                 if (proveriKucicu(curIgrac, curposI, curposJ + pomeraj, m, n)) {
                     odigrajKucicu(m, n, curposI, curposJ, pomeraj, Figura, talon);
+                }
+                else{
+                    talon[curposI][curposJ + pomeraj] = Figura;
                 }
             }
             else{
