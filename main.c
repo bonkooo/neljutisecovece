@@ -243,19 +243,42 @@ ListHeader *inicijalizujIgraca(int Player){
 
 }
 
-void dodajFiguruNaStart (int m, int n, int curIgrac, int talon[m][n], struct listHeader* head){
-    int Figura = PopLastNode(head);
-    if (curIgrac == 1){
-        talon[m-1][0] = Figura;
+void dodajFiguruNaStart (int m, int n, int curIgrac, int talon[m][n], struct listHeader* head) {
+    int Figura;
+    if (curIgrac == 1) {
+        if (talon[m - 1][0] != 0) {
+            printf("Vec postoji figurica na vasem startu. ");
+        } else {
+            Figura = PopLastNode(head);
+            talon[m - 1][0] = Figura;
+        }
+
     }
-    else if (curIgrac == 2){
-        talon[0][0] = Figura;
+    if (curIgrac == 2) {
+        if (talon[0][0] != 0) {
+            printf("Vec postoji figurica na vasem startu. ");
+        } else {
+            Figura = PopLastNode(head);
+            talon[0][0] = Figura;
+        }
+
     }
-    else if (curIgrac == 3){
-        talon[0][n-1] = Figura;
+    if (curIgrac == 3) {
+        if (talon[0][n - 1] != 0) {
+            printf("Vec postoji figurica na vasem startu. ");
+        } else {
+            Figura = PopLastNode(head);
+            talon[0][n - 1] = Figura;
+        }
+
     }
-    else if (curIgrac == 4){
-        talon[m-1][n-1] = Figura;
+    if (curIgrac == 4) {
+        if (talon[m - 1][n - 1] != 0) {
+            printf("Vec postoji figurica na vasem startu. ");
+        } else {
+            Figura = PopLastNode(head);
+            talon[m - 1][n - 1] = Figura;
+        }
     }
 }
 
@@ -310,7 +333,7 @@ int proveraGdeSeNalazi(int m, int n, int i, int j, int curIgrac){
             return 1;
         }
     }
-    else{
+    else if (curIgrac==4){
         if(j==n-1 && i!=m-1){
             return 1;
         }
@@ -332,8 +355,8 @@ void odigrajKucicu(int m,int n,int curposI, int curposJ, int pomeraj, int Figuri
         }
     }
     else if(Figurica/10==1){
-        int ostatak = pomeraj - (m - 1 - curposI);
-        if(m-1-ostatak>5){
+        int ostatak = pomeraj -  curposJ;
+        if(ostatak<5){
             talon[m-1-ostatak][1]=Figurica;
             talon[curposI][curposJ]=0;
 
@@ -433,6 +456,9 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
                 if (proveriKucicu(curIgrac, curposI + pomeraj, curposJ, m, n)) {
                     odigrajKucicu(m, n, curposI, curposJ, pomeraj, Figura, talon);
                 }
+                else{
+                    talon[curposI + pomeraj][curposJ] = Figura;
+                }
             }
             else{
                 talon[curposI + pomeraj][curposJ] = Figura;
@@ -454,6 +480,9 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
                 if (proveriKucicu(curIgrac, curposI, curposJ - pomeraj, m, n)) {
                     odigrajKucicu(m, n, curposI, curposJ, pomeraj, Figura, talon);
                 }
+                else{
+                    talon[curposI][curposJ - pomeraj] = Figura;
+                }
             }
             else{
                 talon[curposI][curposJ - pomeraj] = Figura;
@@ -473,6 +502,9 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
             if(proveraGdeSeNalazi(m,n,curposI,curposJ,curIgrac)) {
                 if (proveriKucicu(curIgrac, curposI - pomeraj, curposJ, m, n)) {
                     odigrajKucicu(m, n, curposI, curposJ, pomeraj, Figura, talon);
+                }
+                else {
+                    talon[curposI - pomeraj][curposJ] = Figura;
                 }
             }
             else {
@@ -496,6 +528,9 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
                 if (proveriKucicu(curIgrac, ostatak, n - 1, m, n)) {
                     odigrajKucicu(m, n, curposI, curposJ, pomeraj, Figura, talon);
                 }
+                else {
+                    talon[ostatak][n - 1] = Figura;
+                }
             }
             else {
                 talon[ostatak][n - 1] = Figura;
@@ -518,6 +553,9 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
                 if (proveriKucicu(curIgrac, m - 1, n - ostatak - 1, m, n)) {
                     odigrajKucicu(m, n, curposI, curposJ, pomeraj, Figura, talon);
                 }
+                else {
+                    talon[m - 1][n - ostatak - 1] = Figura;
+                }
             }
             else {
                 talon[m - 1][n - ostatak - 1] = Figura;
@@ -527,7 +565,7 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
 
         // iz poslednjeg reda u prvu kolonu
     else if (curposI == m - 1 && curposJ - pomeraj < 0 && curposJ != 0) {
-        int ostatak = pomeraj - (m - 1 - curposI);
+        int ostatak = pomeraj -  curposJ;
         // proveri da li je neka figurica tog igraca vec na polju
         if (talon[m - 1 - ostatak][0] / 10 == curIgrac) {
             printf("Polje je zauzeto drugom vasom figurom");
@@ -538,6 +576,9 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
             if(proveraGdeSeNalazi(m,n,curposI,curposJ,curIgrac)) {
                 if (proveriKucicu(curIgrac, m - ostatak - 1, 0, m, n)) {
                     odigrajKucicu(m, n, curposI, curposJ, pomeraj, Figura, talon);
+                }
+                else{
+                    talon[m - 1 - ostatak][0] = Figura;
                 }
             }
             else {
@@ -560,6 +601,9 @@ void pomeriFiguricu(int m, int n, int curposI, int curposJ, int pomeraj, int tal
             if(proveraGdeSeNalazi(m,n,curposI,curposJ,curIgrac)) {
                 if (proveriKucicu(curIgrac, 0, ostatak, m, n)) {
                     odigrajKucicu(m, n, curposI, curposJ, pomeraj, Figura, talon);
+                }
+                else{
+                    talon[0][ostatak] = Figura;
                 }
             }
             else {
@@ -696,7 +740,7 @@ void Potez(int curIgrac, struct listHeader* head, int m, int n, int talon[m][n],
                     dodajFiguruNaStart(m, n, curIgrac, talon, head);
                     break;
                 case 2:
-                    pomeriVecPostojecu(curIgrac, m, n, talon, 6, head1, head2, head3, head4);
+                    PotezPomeranje(curIgrac, m, n, talon, curKockica, head1, head2, head3, head4);
                     break;
                 default:
                     printf("Nepoznata opcija, unesi ponovo\n");
