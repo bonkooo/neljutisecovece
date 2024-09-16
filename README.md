@@ -1,7 +1,5 @@
 # Ne Ljuti Se Čoveče (Ludo) - Console Game
 
-![Starting Board](board.png)
-
 ## Overview
 
 "Ne ljuti se čoveče" is a classic board game implemented in C. The game involves four players moving their pieces across a board by rolling dice. The objective is to get all your pieces to the home area before your opponents. This console-based version allows you to initialize the board, roll dice, move pieces, and update the board after each turn.
@@ -21,6 +19,10 @@
 2. **Board Setup**: Define the dimensions of the board, which will be represented as a matrix.
 3. **Player Moves**: Players take turns rolling the dice and moving their pieces. The game follows the standard rules of "Ne ljuti se čoveče."
 4. **Winning Condition**: A player wins by moving all their pieces to the home area before anyone else.
+
+Board example:
+<img src="board.png" width="500" height="500" alt="Board">
+
 
 ## File Descriptions
 
