@@ -1,4 +1,4 @@
-# Ne Ljuti Se Čoveče (Don't Get Angry, Man) - Console Game
+# Ne Ljuti Se Čoveče (Ludo) - Console Game
 
 ![Starting Board](board.png)
 
