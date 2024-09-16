@@ -20,8 +20,7 @@
 3. **Player Moves**: Players take turns rolling the dice and moving their pieces. The game follows the standard rules of "Ne ljuti se čoveče."
 4. **Winning Condition**: A player wins by moving all their pieces to the home area before anyone else.
 
-Board example:
-<img src="board.png" width="500" height="500" alt="Board">
+<img src="board.png" width="400" height="400" alt="Board">
 
 
 ## File Descriptions
