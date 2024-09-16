@@ -43,7 +43,7 @@
 
 1. Compile the code using GCC:
    ```bash
-   gcc dz1.c -o game
+   gcc main.c -o game
    ```
 1. Run the game:
    ```bash
